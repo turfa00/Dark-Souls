@@ -3,7 +3,7 @@
 du projet.
 2ème étape:Analyse:
 	On doit dire ce que doit faire notre projet, notre labyrinthe, lister les règles par exemple,
-les conditions que devront remplir notre programme.
+les conditions que devront remplir notre programme. On doit dresser un cahier des charges.
 3ème étape:Conception générale:
 	On doit commencer à structurer le code, à lister les fonctions dont on aura besoin pour 
 remplir le cahier des charges.
