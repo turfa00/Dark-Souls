@@ -16,7 +16,7 @@
 * Fumerolle
 * Aava
 * Aldia
-## Dark Souls3:
+## Dark Souls 3:
 * Gaël 
 * Midir 
 * Nameless_King
