@@ -17,4 +17,4 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
           - Décaler chaque case. La première case sera celle insérée, et la dernière case sortira du plateau et sera la prochaine à être insérée.
       - Permettre ou non au pion de se déplacer
           - Lier toutes les cases compatibles pour créer un chemin
-      (WIP)
+      - (WIP)
