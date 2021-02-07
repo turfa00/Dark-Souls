@@ -1,4 +1,4 @@
-## DS1:
+## Dark Souls 1:
 * Ornstein_Smough
 * Artorias
 * Gwen
@@ -7,7 +7,7 @@
 * Pinwheel
 * Nito
 * Priscilla
-## DS2:
+## Dark Souls 2:
 * Alonne
 * Nashandra
 * Velstadt
@@ -16,7 +16,7 @@
 * Fumerolle
 * Aava
 * Aldia
-## DS3:
+## Dark Souls3:
 * Gaël 
 * Midir 
 * Nameless_King
