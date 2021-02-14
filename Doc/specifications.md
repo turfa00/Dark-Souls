@@ -6,7 +6,6 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
               - Faire en sorte qu'elle puisse jouer comme un joueur humain, qu'elle ne soit ni stupide ni infallible
                    - Regarder si de là où elle est, l'IA peut atteindre son trésor
                    - Elle ne bougera une case que si ça lui ouvre un chemin, et si ce n'est pas possible, chercher à embêter les autres joueurs
-                       -U
       - Qui sont-ils?
           - Combien de joueurs humains?
           - Donner la possibilité aux joueurs de choisir le pseudo et la couleur
@@ -18,16 +17,31 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
           - Définir tous les différents types de cases
               - Définir une case
               - Créer les trésors
-      - Bloquer une rangée sur deux
-  - Définir tous les coups qu'il est possible de faire
+      - Permettre à 12 lignes uniquement de se déplacer
+  - Jouer un tour
+      - Afficher le plateau
+          - Afficher le plateau avec ses cases fixes
+          - Afficher les flèches autour du plateau avec leur numéro
+          - Afficher une ligne de cases mouvantes
+              - Afficher une case
+                  - Afficher un trésor sur une case
+                  - Afficher une case de sorte à ce qu'on reconnaisse quel type de case c'est, où sont les murs
+                  - Afficher un pion sur une case
+          - Afficher la case temporaire à coté du plateau
       - Permettre de pousser une rangée de tuiles non bloquées, dans les deux sens.
           - Décaler chaque case. La première case sera celle insérée, et la dernière case sortira du plateau et sera la prochaine à être insérée
               - Si on peut, décaler la ligne d'un cran
                   - Regarder si la ligne ou la colonne qu'on veut décaler est une des 12 lignes décalable
               - Insérer la case temporaire dans le plateau pour remplir la ligne
               - La case à la fin de la ligne devient la nouvelle case temporaire
-              - Si un ou plusieurs pions sont sont sur la case qui sort, alors ils sont placés sur la case qui vient de rentrer
+              - Si un ou plusieurs pions sont sur la case qui sort, alors ils sont placés sur la case qui vient de rentrer
       - Permettre ou non au pion de se déplacer
-          -Le pion peut-il atteindre son trésor?
-              - Lier toutes les cases compatibles pour créer un chemin
-      - (WIP)
+          - Le pion peut-il se déplacer à l'endroit voulu par le joueur?
+              - Existe-il un chemin?
+                  - Lier toutes les cases compatibles pour créer un chemin
+      - Afficher la manipulation effectuée par le joueur({nom du joueur} a déplacé son pion en...)
+  - Stopper la partie lorsqu'un joueur a gagné
+      - Regarder si un joueur a gagné à la fin du tour
+          - Regarder si la pile de trésors d'un joueur est vide et si il est placé sur sa case de départ
+      - Afficher un message en conséquense
+          - Regarder quel joueur a gagné
