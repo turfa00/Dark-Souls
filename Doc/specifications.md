@@ -37,12 +37,10 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
                   - Afficher une case de sorte à ce qu'on reconnaisse quel type de case c'est, où sont les murs
                   - Afficher un pion sur une case
           - Afficher la case temporaire à coté du plateau
-      - Permettre de pousser une rangée de tuiles non bloquées, dans les deux sens.
-          - Décaler chaque case. La première case sera celle insérée, et la dernière case sortira du plateau et sera la prochaine à être insérée
-              - Si on peut, décaler la ligne d'un cran
-                  - Regarder si la ligne qu'on veut décaler est une des 12 lignes décalable
-                  - Regarder si la ligne qu'on veut décaler à été décalée juste avant dans le sens inverse
-                      - Garder en mémoire la dernière ligne décalée et dans quel sens elle l'a été
+          - Si on peut, décaler la ligne d'un cran
+              - Regarder si la ligne qu'on veut décaler est une des 12 lignes décalable
+              - Regarder si la ligne qu'on veut décaler à été décalée juste avant dans le sens inverse
+                  - Garder en mémoire la dernière ligne décalée et dans quel sens elle l'a été
               - Insérer la case temporaire dans le plateau pour remplir la ligne
               - La case à la fin de la ligne devient la nouvelle case temporaire
               - Si un ou plusieurs pions sont sur la case qui sort, alors ils sont placés sur la case qui vient de rentrer
@@ -51,6 +49,9 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
               - Existe-il un chemin?
                   - Lier toutes les cases compatibles pour créer un chemin
       - Afficher la manipulation effectuée par le joueur({nom du joueur} a déplacé son pion en...)
+      - Regarder si on est sur une case trésor
+      - Passer au trésor suivant quand on atteind
+          - Arrivé au dernier trésor, le nouvel objectif est le point de spawn(un des 4 coins de l'écran)
 
   - ### Stopper la partie lorsqu'un joueur a gagné
       - Regarder si un joueur a gagné à la fin du tour
