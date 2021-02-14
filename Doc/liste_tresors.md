@@ -1,27 +1,27 @@
 ## Dark Souls 1:
-* Ornstein_Smough
-* Artorias
-* Gwen
-* Manus
-* Quelaag
+* Ornstein and Smough
+* Artorias the Abysswalker
+* Gwen, Lord of Cinders
+* Manus, Father of the Abyss
+* Chaos Witch Quelaag
 * Pinwheel
-* Nito
-* Priscilla
+* Gravelord Nito
+* Crossbreed Priscilla
 ## Dark Souls 2:
-* Alonne
+* Sir Alonne
 * Nashandra
-* Velstadt
-* Elena
-* Mytha
-* Fumerolle
-* Aava
-* Aldia
+* Velstadt, the Royal Aegis
+* Elena, Squalid Queen
+* Mytha, the Baneful Queen
+* Fume Knight
+* Aava, the King's Pet
+* Aldia, Scholar of the First Sin
 ## Dark Souls 3:
-* Gaël 
-* Midir 
-* Nameless_King
-* Aldrich
-* Friede
-* Lothric
-* Sulyvahn
-* Vordt
+* Slave Knight Gaël 
+* Darkeater Midir 
+* Nameless King
+* Aldrich, Devourer of Gods
+* Sister Friede
+* Yhorm the Giant
+* Pontiff Sulyvahn
+* Champion Gundyr
