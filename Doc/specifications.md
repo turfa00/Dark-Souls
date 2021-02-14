@@ -3,18 +3,31 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
   - Identifier les joueurs
       - Combien sont-ils?
           - Le nombre d'humains nous donnera le nombre d'IA. Donc nouveau problème: programmer une IA
-              - Faire en sorte que l'IA puisse jouer intelligemment
-                   - Faire en sorte qu'elle puisse analyser tous les coups possibles et choisir le plus optimal
+              - Faire en sorte qu'elle puisse jouer comme un joueur humain, qu'elle ne soit ni stupide ni infallible
+                   - Regarder si de là où elle est, l'IA peut atteindre son trésor
+                   - Elle ne bougera une case que si ça lui ouvre un chemin, et si ce n'est pas possible, chercher à embêter les autres joueurs
+                       -U
       - Qui sont-ils?
+          - Combien de joueurs humains?
           - Donner la possibilité aux joueurs de choisir le pseudo et la couleur
           - Assigner un pion à chaque joueur
+          - Répartir équitablement et aléatoirement la liste des trésors entre chaque joueurs
+              - Trier un tableau de façon aléatoire
   - Créer le plateau
       - Placer aléatoirement les cases (chemin, trésor)
           - Définir tous les différents types de cases
+              - Définir une case
+              - Créer les trésors
       - Bloquer une rangée sur deux
   - Définir tous les coups qu'il est possible de faire
       - Permettre de pousser une rangée de tuiles non bloquées, dans les deux sens.
-          - Décaler chaque case. La première case sera celle insérée, et la dernière case sortira du plateau et sera la prochaine à être insérée.
+          - Décaler chaque case. La première case sera celle insérée, et la dernière case sortira du plateau et sera la prochaine à être insérée
+              - Si on peut, décaler la ligne d'un cran
+                  - Regarder si la ligne ou la colonne qu'on veut décaler est une des 12 lignes décalable
+              - Insérer la case temporaire dans le plateau pour remplir la ligne
+              - La case à la fin de la ligne devient la nouvelle case temporaire
+              - Si un ou plusieurs pions sont sont sur la case qui sort, alors ils sont placés sur la case qui vient de rentrer
       - Permettre ou non au pion de se déplacer
-          - Lier toutes les cases compatibles pour créer un chemin
+          -Le pion peut-il atteindre son trésor?
+              - Lier toutes les cases compatibles pour créer un chemin
       - (WIP)
