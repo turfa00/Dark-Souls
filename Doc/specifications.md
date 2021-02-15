@@ -6,6 +6,7 @@ Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
         - Donner la possibilité aux joueurs de choisir leur pseudo
         - Donner la possibilité aux joueurs de choisir leur couleur
             - Changer la couleur d'une écriture
+            
     - Combien d'humains / Combien d'IA ?
         - Programmer une IA
             - Faire en sorte qu'elle puisse jouer comme un joueur humain, qu'elle ne soit ni stupide ni infallible
