@@ -1,23 +1,23 @@
 On doit implémenter un programme qui va permettre à un maximum de 4 joueurs/IA de jouer au jeu du Labyrinthe.
 Pour ce faire, nous devons résoudre plusieurs sous-problèmes:
 
-  - ### Identifier les joueurs   
-      - Qui sont-ils?
+- ### Identifier les joueurs   
+    - Qui sont-ils?
         - Donner la possibilité aux joueurs de choisir leur pseudo
         - Donner la possibilité aux joueurs de choisir leur couleur
             - Changer la couleur d'une écriture
-        - Combien d'humains / Combien d'IA ?
-            - Programmer une IA
-                - Faire en sorte qu'elle puisse jouer comme un joueur humain, qu'elle ne soit ni stupide ni infallible
-                    - Regarder si de là où elle est, l'IA peut atteindre son trésor
-                    - Elle ne bougera une case que si ça lui ouvre un chemin pour déplacer son pion d'au moins une case, et si ce n'est pas possible, chercher à embêter les autres joueurs
-                        - Regarder si, quand on bouge une ligne à proximité de l'IA, ça lui libère un chemin
-                        - Boucher le chemin, si c'est possible d'un autre joueur
-                            - Regarder, si en bougeant une  ligne, le chemin du joueur sera bouché
-                        - Un autre joueur a-t-il un chemin ouvert pour son trésor?(qui est connu on le rappelle)
-        - Assigner un pion à chaque joueur(pseudo, couleur...)
-        - Répartir équitablement et aléatoirement la liste des trésors entre chaque joueurs
-            - Trier un tableau de façon aléatoire
+    - Combien d'humains / Combien d'IA ?
+        - Programmer une IA
+            - Faire en sorte qu'elle puisse jouer comme un joueur humain, qu'elle ne soit ni stupide ni infallible
+                - Regarder si de là où elle est, l'IA peut atteindre son trésor
+                - Elle ne bougera une case que si ça lui ouvre un chemin pour déplacer son pion d'au moins une case, et si ce n'est pas possible, chercher à embêter les autres joueurs
+                    - Regarder si, quand on bouge une ligne à proximité de l'IA, ça lui libère un chemin
+                    - Boucher le chemin, si c'est possible d'un autre joueur
+                        - Regarder, si en bougeant une  ligne, le chemin du joueur sera bouché
+                    - Un autre joueur a-t-il un chemin ouvert pour son trésor?(qui est connu on le rappelle)
+    - Assigner un pion à chaque joueur(pseudo, couleur...)
+    - Répartir équitablement et aléatoirement la liste des trésors entre chaque joueurs
+        - Trier un tableau de façon aléatoire
 
   - ### Créer le plateau
       - Placer aléatoirement les cases (chemin, trésor)
