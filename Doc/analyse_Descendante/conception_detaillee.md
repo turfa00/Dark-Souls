@@ -1,4 +1,122 @@
-* 
+# Fonctions:
+
+* joueur* entrer_joueurs()
+    * joueur *j= demander_nombre_joueurs()
+    * demander_joueurs_humains(j)
+    * demander_couleur_joueurs(j)
+    * demander_pseudo_joueur(j)
+
+* void demander_joueurs_humains(joueur *j)
+    * afficher "Combien d'IA?"
+    * si nombre d'IA  supérieur a nbrdejoueur-1
+        + afficher "Nombre d'IA pas cohérent avec le nombre de joueurs"
+    * sinon 
+        + pour i de 1 a nombre d'IA
+            * j[i].ia=1
+#
+
+* joueur* demander_nombre_joueurs()
+    * afficher "Combien de joueurs sur cette partie?"(nbr)
+    * si nbr différent de 2 3 et 4
+        + créer des struct joueurs en conséquence
+    * sinon
+        + afficher "Il n'y a pas un nombre adéquat de joueur"
+#
+
+
+* void demander_couleur_joueurs(joueurs *j)
+    * pour chaque joueur
+        + afficher "Quelle est la couleur du joueur j.i?"
+        + j.couleur= le scanf 
+#
+
+* void demander_pseudo_joueur(joueur *j)
+    * pour chaque joueur
+        + afficher "Quel est le pseudo du joueur j.i?"
+        + j.nom= le scanf
+#
+
+* void changer_couleur(joueur j)
+    * # ???????
+#
+
+* joueur creer_ia(joueur j)
+    * j.ia=1
+#
+
+* void victoire_dun_joueur(joueur j)
+    * si case_depart(j)==1
+        + afficher_message_victoire(j)
+        + on sort de la boucle du main avec les jouer_tour
+#
+
+* void afficher_message_victoire(joueur j)
+    * afficher "Le joueur j.nom a remporté la partie!"
+#
+
+* int case_depart(joueur j)
+    * si j.tresors[0]='\0'
+        + retourne 1
+    * sinon
+        + retourne 0
+#
+
+* void jouer_tour(joueur j)
+    * # ??????????
+
+* ligne choisir_ligne_ia(plateau p, joueur j)
+    * # ??????????
+#
+
+* int tresor_atteignable(plateau p, joueur j)
+    * si peut_on_deplacer_ici(p, j.case, j.tresor[0].case)==1
+        + retourne 1
+    * sinon
+        + retourne 0
+#
+
+* int est_on_sur_tresor(joueur j)
+    * si j.case.tresor==j.tresorsrestants[0]
+        + retourne 1
+    * sinon
+        + retourne 0
+#
+
+* void tresor_suivant(joueur j)
+    * pour tous les tresors restants -1(j.tresorsrestants)
+        + tresors[i]=tresors[i+1]
+    * dernier tresor(qui est ducoup en double)='\0'
+#
+
+* void deplacer_pion(joueur j, plateau p, case c2)
+    * si pion_deplacable==1
+        + j.case=c2
+    * sinon
+        + afficher "Le pion ne peux pas être déplacé ici"
+#
+
+* int pion_deplacable(plateau p, case c1, case c2)
+    * si le pion n'est pas entre 4 murs ET si peut_on_deplacer_ici(p, c1, c2)==1
+        + retourne 1
+    * sinon
+        + retourne 0
+#
+
+* int peut_on_deplacer_ici(plateau p, case c1, case c2)
+    * # ???????
+#
+
+* void afficher_plateau(plateau p)
+    * pour i de 0 a 7
+        + afficher_fleche(s1)
+    * pour i de 0 a 7
+        + afficher_fleche(s2)
+    * afficher_lignes(p)
+    * pour i de 0 a 7
+        + afficher_fleche(n1)
+    * pour i de 0 a 7
+        + afficher_fleche(n2)
+#
 
 * void afficher_fleche(char c)
     * si c='s1', afficher "|"
@@ -14,19 +132,16 @@
     * afficher_case(c)
 #
 
-* void afficher_lignes_mouvantes(ligne* l)
+* void afficher_lignes(plateau p)
     * pour i de 1 a 7
-        + si i modulo 2 =0
-            * afficher_ligne(l[i])
-        + Sinon
-        + pour j de 1 a 7
-            * si j modulo 2 =0
-                * afficher_case(case numéro i de la ligne j+6)
+            * afficher_ligne(p.l[i])
 #
 
 * void afficher_ligne(ligne l)
+    * afficher_fleche(e)
     * pour i de 1 a 7
         + afficher_case(l.c[i])
+    * afficher_fleche(o\n)
 #
 
 * void afficher_case(case c)
@@ -101,4 +216,33 @@
         + on renvoit 0
     * Sinon:
         + on renvoit 1
+#
+
+# Structures
+
+* plateau
+    * les 12 lignes
+#
+
+* joueur
+    * le nom
+    * la couleur
+    * si c'est une ia(un int)
+    * la liste des tresors qu'il lui reste a atteindre
+#
+
+* tresor
+    * le nom
+    * la case où il est
+#
+
+* ligne
+    * le numéro de la ligne
+    * le tableau de cases de la ligne
+#
+
+* case
+    * le trésor sur la case(RIEN si il n'y en a pas)
+    * le types de case (un numéro)(quels murs il y a)
+    * le pion sur la case (PERSONNE si il n'y en a pas)
 #
