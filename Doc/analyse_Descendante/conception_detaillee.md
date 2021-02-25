@@ -69,7 +69,54 @@
 #
 
 * plateau creer_plateau()
+    * plateau p=creer_cases_fixes()
+    * on cree un tableau de 12 lignes=creer_lignes_mouvantes()
+    * assignation_indices_cases(le tableau)
     * 
+#
+
+* void assignation_indices_cases(ligne*)
+    * pour i de 2 a 6 (de 2 en 2)
+        + pour toutes les 8 cases de la ligne[i/2] (j de 1 a 8):
+            * case.numero_ligne[0]=i/2 et case.numero_ligne[1]=(i/2)+6 et quand j=i: case.numero_ligne[2]=i
+            * indice i de la case =i
+            * indice j de la case=j
+    * pour i de 8 a 12 (de 2 en 2)
+        + pour toutes les 8 cases de la ligne[i/2] (j de 1 a 8):
+            * case.numero_ligne[0]=i/2 et case.numero_ligne[1]=(i/2)+6 et quand j=i: case.numero_ligne[2]=i
+            * indice j de la case=i
+            * indice i de la case=j
+    * pour les lignes 7 a 12
+        + pour toutes les cases de la ligne
+            * case.numero_ligne[1]=numero de la ligne
+            * case.numero_ligne[0]=numero de la ligne-6
+#
+
+* ligne* creer_lignes_mouvantes()
+    * pour i de 1 a 12
+        + tab[i].numéro=i
+        + on créé un tableau de 8 cases et on l'assigne a la ligne
+        + pour chaque case de la ligne
+            * case.numligne=i
+#
+
+* plateau creer_casesfixes()
+    * case1,1.type=be
+    * case1,3.type=ce
+    * case1,5.type=ce
+    * case1,7.type=bs
+    * case3,1.type=cn
+    * case3,3.type=cn
+    * case3,5.type=ce
+    * case3,7.type=cs
+    * case5,1.type=cn
+    * case5,3.type=co
+    * case5,5.type=cs
+    * case5,7.type=cs
+    * case7,1.type=bn
+    * case7,3.type=co
+    * case7,5.type=co
+    * case7,7.type=bo
 #
 
 * assigner_valeurs_orientations(p)
@@ -121,7 +168,10 @@
     * sinon
         + retourne 0
 #
+
+
 static int tabcaseint=0
+
 * int peut_on_deplacer_ici(plateau p, case c1, case c2, case* tabcase)
     * tabcase[tabcaseint]=c1
     * tabcaseint++
@@ -257,6 +307,7 @@ static int tabcaseint=0
 
 * plateau
     * les 12 lignes
+    * la case temporaire
 #
 
 * joueur
@@ -281,4 +332,6 @@ static int tabcaseint=0
     * le types de case et son orientation(chaine(an, be...))
     * si il y a des murs au 4 orientations(4 entiers(booléens) h, b, d, g)
     * le pion sur la case (PERSONNE si il n'y en a pas)
+    * le numéro de la ligne auquelle la case appartient (tableau de 3 int, -1, -1, -1 si case non mouvante)
+    * les indices de la case dans le plateau
 #
