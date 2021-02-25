@@ -61,7 +61,7 @@
         + retourne 0
 #
 
-* void jouer_tour(joueur j)
+* void jouer_tour_ia(joueur j)
     * # ??????????
 
 * ligne choisir_ligne_ia(plateau p, joueur j)
