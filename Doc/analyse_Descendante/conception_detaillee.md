@@ -73,7 +73,27 @@
     * on cree un tableau de 12 lignes=creer_lignes_mouvantes()
     * assignation_indices_cases(le tableau)
     * tri_aleatoire_cases_mouvantes(p)
-    * 
+    * tresor* liste_tresors=creer_tresors()
+    * placer_tresors(p, liste_tresors)
+#
+
+* tresor* creer_tresors()
+    * on crée un tableau de 24 trésors
+    * pour i de 0 a 23:
+        + tresor[i].numero=i+1
+        + tresor[i].nom="le nom"(peut etre dans un fichier)
+    * retourne le tableau
+#
+
+* void placer_tresors(plateau p, tresor* liste_tresors)
+    * creer un tableau de int de taille 34, le remplir avec 0,1,2,3,4...33
+    * le trier aléatoirement
+    * int j=0
+    * pour i de 0 a 24
+        + si la case n'est pas un coin
+            * on associe a la case qui a le numéro tab[i] le tresor numero i de la liste
+        + sinon
+            * j++ et on associe le tresor numero i a la case[24+j]
 #
 
 * void tri_aleatoire_cases_mouvantes(plateau p)
@@ -111,14 +131,17 @@
 #
 
 * ligne* creer_lignes_mouvantes()
+    * on crée un tableau de 12 lignes
     * pour i de 1 a 12
         + tab[i].numéro=i
         + on créé un tableau de 8 cases et on l'assigne a la ligne
         + pour chaque case de la ligne
             * case.numligne=i
+    * on renvoie le tableau
 #
 
 * plateau creer_casesfixes()
+    * on crée un plateau
     * case1,1.type=be
     * case1,3.type=ce
     * case1,5.type=ce
@@ -135,9 +158,10 @@
     * case7,3.type=co
     * case7,5.type=co
     * case7,7.type=bo
+    * retourne le plateau
 #
 
-* assigner_valeurs_orientations(p)
+* void assigner_valeurs_orientations(p)
     * pour chaque case du plateau:
         + si case an alors h=b=1 et g=d=0
         + si case ae alors h=b=0 et d=g=1
@@ -272,32 +296,20 @@ static int tabcaseint=0
 #
 
 * void afficher_coup(case c1, case c2, ligne l, joueur j)
-    * afficher "Le joueur j a poussé la ligne l et a déplacé son pion de la case c1 a la case c2"
+    * afficher "Le joueur j.nom a poussé la ligne l et a déplacé son pion de la case c1 a la case c2"
 #
 
-* int peut_on_pousser(ligne l, int sens)
-    * Si est_elle_decalable(l, sens)==1 ET si l.decalable=1
-        + on retourne 1
+* int est_elle_decalable(ligne l)
+    * Si l=ligne_tmp
+       + on retourne 1
     * Sinon on retourne 0
 #
 
-* int est_elle_decalable(ligne l, int sens)
-    * Si decalee_avant(l, sens)==1 alors
-       + on retourne 0
-    * Sinon on retourne 1
-#
 
-* int decalee_avant(ligne l, int sens)
-    * Si l == a ligne_tmp ET si sens+sens_tmp égal à 0
-         + on retourne 1
-    * Sinon on retourne 0
-#
-
-* void pousser_rangee(ligne l, int sens)
-    * Si peut_on_pousser(l, sens)==1
-        + Si sens négatif
-        + Pour i de 8 a 1
-            * l.case[i]=l.case[i-1]
+* void pousser_rangee(ligne l)
+    * Si est_elle_decalable(l)==1
+        + Pour i de 0 a 7
+            * l.case[i+1]=l.case[i]
         + l.case[0]=case_tmp
         + case_tmp=case[8]
 #
