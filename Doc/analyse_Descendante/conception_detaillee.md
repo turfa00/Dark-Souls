@@ -72,7 +72,25 @@
     * plateau p=creer_cases_fixes()
     * on cree un tableau de 12 lignes=creer_lignes_mouvantes()
     * assignation_indices_cases(le tableau)
+    * tri_aleatoire_cases_mouvantes(p)
     * 
+#
+
+* void tri_aleatoire_cases_mouvantes(plateau p)
+    * creer un tableau de int de taille 34, le remplir avec 0,1,2,3,4...33
+    * trier aléatoirement ce tableau
+    * pour i de 0 a 11
+        + si le num de la case est 0(la case tmp), case_tmp.type='a', sinon:
+            * pour la case dont le case.numero est = a tab[i]: case.type[0]='a'
+            * pour la case dont le case.numero est = a tab[i]: case.type[1]= une orientation aléatoire entre les 4(h,b,d ou g)
+    * pour i de 12 a 17
+        + si le num de la case est 0(la case tmp), case_tmp.type='c', sinon:
+            * pour la case dont le case.numero est = a tab[i]: case.type[0]='c'
+            * pour la case dont le case.numero est = a tab[i]: case.type[1]= une orientation aléatoire entre les 4(h,b,d ou g)
+    * pour i de 18 a 33
+        + si le num de la case est 0(la case tmp), case_tmp.type='b', sinon:
+            * pour la case dont le case.numero est = a tab[i]: case.type[0]='b'
+            * pour la case dont le case.numero est = a tab[i]: case.type[1]= une orientation aléatoire entre les 4(h,b,d ou g)
 #
 
 * void assignation_indices_cases(ligne*)
@@ -81,15 +99,15 @@
             * case.numero_ligne[0]=i/2 et case.numero_ligne[1]=(i/2)+6 et quand j=i: case.numero_ligne[2]=i
             * indice i de la case =i
             * indice j de la case=j
+            * case.numero=(i/2)*3+((i/2)-1)*7+j
     * pour i de 8 a 12 (de 2 en 2)
         + pour toutes les 8 cases de la ligne[i/2] (j de 1 a 8):
             * case.numero_ligne[0]=i/2 et case.numero_ligne[1]=(i/2)+6 et quand j=i: case.numero_ligne[2]=i
             * indice j de la case=i
             * indice i de la case=j
-    * pour les lignes 7 a 12
-        + pour toutes les cases de la ligne
-            * case.numero_ligne[1]=numero de la ligne
-            * case.numero_ligne[0]=numero de la ligne-6
+    * pour i de 1 a 7 (par 2)
+        + pour j de 2 a 6 (par 2)
+            * case[i][j].numero=((i-i%2)*5+j
 #
 
 * ligne* creer_lignes_mouvantes()
@@ -319,6 +337,7 @@ static int tabcaseint=0
 
 * tresor
     * le nom
+    * son numero
     * la case où il est
 #
 
@@ -328,10 +347,11 @@ static int tabcaseint=0
 #
 
 * case
-    * le trésor sur la case(RIEN si il n'y en a pas)
+    * le trésor sur la case(rien si il n'y en a pas)
     * le types de case et son orientation(chaine(an, be...))
     * si il y a des murs au 4 orientations(4 entiers(booléens) h, b, d, g)
     * le pion sur la case (PERSONNE si il n'y en a pas)
-    * le numéro de la ligne auquelle la case appartient (tableau de 3 int, -1, -1, -1 si case non mouvante)
+    * numero_ligne le numéro de la ligne auquelle la case appartient (tableau de 3 int, -1, -1, -1 si case non mouvante)
+    * numero le numéro de case/34
     * les indices de la case dans le plateau
 #
