@@ -68,6 +68,26 @@
     * # ??????????
 #
 
+* plateau creer_plateau()
+    * 
+#
+
+* assigner_valeurs_orientations(p)
+    * pour chaque case du plateau:
+        + si case an alors h=b=1 et g=d=0
+        + si case ae alors h=b=0 et d=g=1
+        + si case as alors h=b=1 et d=g=0
+        + si case ao alors h=b=0 et d=g=1
+        + si case bn alors h=d=1 et b=g=0
+        + si case be alors h=g=0 et b=d=1
+        + si case bs alors g=b=1 et h=d=0
+        + si case bo alors h=g=1 et d=b=0
+        + si case cn alors g=0 et h=d=b=1
+        + si case ce alors h=0 et d=g=b=1
+        + si case cs alors d=0 et h=g=b=1
+        + si case co alors b=0 et h=g=d=1
+#
+
 * int tresor_atteignable(plateau p, joueur j)
     * si peut_on_deplacer_ici(p, j.case, j.tresor[0].case)==1
         + retourne 1
@@ -96,14 +116,29 @@
 #
 
 * int pion_deplacable(plateau p, case c1, case c2)
-    * si le pion n'est pas entre 4 murs ET si peut_on_deplacer_ici(p, c1, c2)==1
+    * si le pion n'est pas entre 4 murs(utiliser case_compatible) ET si peut_on_deplacer_ici(p, c1, c2)==1
+        + retourne 1
+    * sinon
+        + retourne 0
+#
+static int tabcaseint=0
+* int peut_on_deplacer_ici(plateau p, case c1, case c2, case* tabcase)
+    * tabcase[tabcaseint]=c1
+    * tabcaseint++
+    * (cette ligne est un for)si tabcaseint=0, pour les 4 orientation, sinon, pour seulement 3(pas celle d'ou l'on vient):
+        + si case_compatible(p, c1, (la case a coté de c1(suivant l'orientation)), tabcase)==1
+            * peut_on_deplacer_ici(p, la case a coté, c2, tabcase)
+    * si c2 présente dans tabcase
         + retourne 1
     * sinon
         + retourne 0
 #
 
-* int peut_on_deplacer_ici(plateau p, case c1, case c2)
-    * # ???????
+* int case_compatible(case c1, case c2, char orientation(où est la case 1 par rapport a la 2))
+    * si c1.orientation=1 et c2.orientation opposée=1
+        + retourne 1
+    * sinon
+        + retourne 0
 #
 
 * void afficher_plateau(plateau p)
@@ -243,6 +278,7 @@
 
 * case
     * le trésor sur la case(RIEN si il n'y en a pas)
-    * le types de case (un numéro)(quels murs il y a)
+    * le types de case et son orientation(chaine(an, be...))
+    * si il y a des murs au 4 orientations(4 entiers(booléens) h, b, d, g)
     * le pion sur la case (PERSONNE si il n'y en a pas)
 #
