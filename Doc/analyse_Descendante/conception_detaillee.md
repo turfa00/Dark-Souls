@@ -17,7 +17,7 @@
 
 * joueur* demander_nombre_joueurs()
     * afficher "Combien de joueurs sur cette partie?"(nbr)
-    * si nbr différent de 2 3 et 4
+    * si nbr égal à 2, 3 ou 4
         + créer des struct joueurs en conséquence
     * sinon
         + afficher "Il n'y a pas un nombre adéquat de joueur"
@@ -61,9 +61,13 @@
 #
 
 * void jouer_tour_ia(joueur j, plateau p)
+    * analyse_coups_possibles_IA()
     * pousser_rangee(choisir_ligne_ia(p, j))
     * deplacer_pion_ia()
     * afficher_coup()
+#
+
+* void analyse_coups_possibles_IA() (En cours de conception)
 #
 
 * ligne choisir_ligne_ia(plateau p, joueur j)
