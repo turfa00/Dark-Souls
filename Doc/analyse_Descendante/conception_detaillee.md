@@ -12,7 +12,7 @@
         + afficher "Nombre d'IA pas cohérent avec le nombre de joueurs"
     * sinon 
         + pour i de 1 a nombre d'IA
-            * j[i].ia=1
+            * creer_ia(j[i])
 #
 
 * joueur* demander_nombre_joueurs()
@@ -23,17 +23,16 @@
         + afficher "Il n'y a pas un nombre adéquat de joueur"
 #
 
-
 * void demander_couleur_joueurs(joueurs *j)
     * pour chaque joueur
-        + afficher "Quelle est la couleur du joueur j.i?"
-        + j.couleur= le scanf 
+        + afficher "Quelle est la couleur du joueur j.i?"(afficher les couleurs 1:Rouge, 2:Jaune...)
+        + j.couleur= le scanf (un int)
 #
 
 * void demander_pseudo_joueur(joueur *j)
     * pour chaque joueur
         + afficher "Quel est le pseudo du joueur j.i?"
-        + j.nom= le scanf
+        + j.nom= le scanf(%s)
 #
 
 * void changer_couleur(joueur j)
@@ -41,7 +40,7 @@
 #
 
 * joueur creer_ia(joueur j)
-    * j.ia=1
+    * j.ia=1(fonction courte mais plus parlante ds le code que juste "j.ia=1")
 #
 
 * void victoire_dun_joueur(joueur j)
@@ -61,11 +60,24 @@
         + retourne 0
 #
 
-* void jouer_tour_ia(joueur j)
-    * # ??????????
+* void jouer_tour_ia(joueur j, plateau p)
+    * pousser_rangee(choisir_ligne_ia(p, j))
+    * deplacer_pion_ia()
+    * afficher_coup()
+#
 
 * ligne choisir_ligne_ia(plateau p, joueur j)
-    * # ??????????
+    * pour les 12 lignes:
+        + si, quand on bouge la ligne, le prochain tresor est accessible
+            * on retourne cette ligne
+#
+
+* void deplacer_pion_ia()
+    * si le prochain tresor est atteignable
+        + deplacer_pion() sur le tresor
+        + tresor_suivant()
+    * sinon
+        on reste ou on est
 #
 
 * plateau creer_plateau()
@@ -211,7 +223,6 @@
         + retourne 0
 #
 
-
 static int tabcaseint=0
 
 * int peut_on_deplacer_ici(plateau p, case c1, case c2, case* tabcase)
@@ -304,7 +315,6 @@ static int tabcaseint=0
        + on retourne 1
     * Sinon on retourne 0
 #
-
 
 * void pousser_rangee(ligne l)
     * Si est_elle_decalable(l)==1
