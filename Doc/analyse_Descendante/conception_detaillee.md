@@ -5,6 +5,7 @@
     * demander_joueurs_humains(j)
     * demander_couleur_joueurs(j)
     * demander_pseudo_joueur(j)
+#
 
 * void demander_joueurs_humains(joueur *j)
     * afficher "Combien d'IA?"
