@@ -68,7 +68,16 @@
     * afficher_coup()
 #
 
-* void analyse_coups_possibles_IA() (En cours de conception)
+* analyse_coups_possibles_IA() (En cours de conception)
+    * On fait un int tab[48][48] en considérant qu'on place le pion automatiquement à une case précise après le premier coup, genre la plus proche du trésor
+    * Et dans le tab on stocke des compteurs. Faut trouver un moyen d'associer chaque indice du tableau à un coup.
+    * Tout est à 0 au début:
+        * si le trésor est atteint dans une des 48 premières possibilités (tab[0][0] jusqu'à tab[0][47]) on fait +1 dans ces cases et on s'arrête à la 48e 
+        * sinon on remplit le tableau 48*48 et on fait +1 dans les cases où le trésor est atteint au deuxième coup.
+        * sinon on incrémente pas.
+    * Donc:
+    * Dans le deuxième cas on lui fait prendre le chemin qui correspond à la première occurence de 1 du tableau pour que ce soit plus simple .
+    * Dans le premier cas vu qu'on aura que 48 possibilités on peut sûrement complexifier un peu en analysant les 48 possibilités de chaque autre joueurs pour voir quel coup gênerait le plus. (Nouvelle fonction analyse_bloquage_possible_IA()) Du coup ça nous fait une IA qui devient menaçante dès qu'elle s'approche de son trésor et ça donne un intérêt pour vouloir la bloquer.
 #
 
 * ligne choisir_ligne_ia(plateau p, joueur j)
@@ -76,6 +85,9 @@
         + si, quand on bouge la ligne, le prochain tresor est accessible
             * on retourne cette ligne
 #
+
+* analyse_bloquage_possible_IA()
+    *
 
 * void deplacer_pion_ia()
     * si le prochain tresor est atteignable
