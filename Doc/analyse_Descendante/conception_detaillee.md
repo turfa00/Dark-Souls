@@ -68,9 +68,9 @@
     * afficher_coup()
 #
 
-* analyse_coups_possibles_IA() (En cours de conception)
-    * On fait un int tab[48][48] en considérant qu'on place le pion automatiquement à une case précise après le premier coup, genre la plus proche du trésor
-    * Et dans le tab on stocke des compteurs. Faut trouver un moyen d'associer chaque indice du tableau à un coup.
+* analyse_coups_possibles_IA(plateau p, joueur j) (En cours de conception)
+    * On fait un tab[48][48] d'entiers en considérant qu'on place le pion automatiquement à une case précise après le premier coup, genre la plus proche du trésor
+    * (Faut trouver un moyen d'associer chaque indice du tableau à un coup, nouvelle struct?)
     * Tout est à 0 au début:
         * si le trésor est atteint dans une des 48 premières possibilités (tab[0][0] jusqu'à tab[0][47]) on fait +1 dans ces cases et on s'arrête à la 48e 
         * sinon on remplit le tableau 48*48 et on fait +1 dans les cases où le trésor est atteint au deuxième coup.
@@ -80,14 +80,16 @@
     * Dans le premier cas vu qu'on aura que 48 possibilités on peut sûrement complexifier un peu en analysant les 48 possibilités de chaque autre joueurs pour voir quel coup gênerait le plus. (Nouvelle fonction analyse_bloquage_possible_IA()) Du coup ça nous fait une IA qui devient menaçante dès qu'elle s'approche de son trésor et ça donne un intérêt pour vouloir la bloquer.
 #
 
+* analyse_bloquage_possible_IA(plateau p, joueur j, autres joueurs, analyse_coups_possibles_IA)
+    * Même principe que analyse_coups_possibles_IA pour les 48 prochains coups possibles des autres joueurs, afin de savoir s'ils pourront accéder à leur trésor au prochain coup. (tab[48], et +1 s'ils peuvent y accéder)
+    * On va ensuite analyser chaque coup retenu par analyse_coups_possibles_IA et incrémenter chaque case dans le cas où le coup d'un joueur passe de 1 à 0. Le coup ayant été le plus de fois incrémentée est celle qui bloquera le plus de coups possibles chez les autres joueurs tout en permettant à l'IA d'atteindre son trésor
+#
+
 * ligne choisir_ligne_ia(plateau p, joueur j)
     * pour les 12 lignes:
         + si, quand on bouge la ligne, le prochain tresor est accessible
             * on retourne cette ligne
 #
-
-* analyse_bloquage_possible_IA()
-    *
 
 * void deplacer_pion_ia()
     * si le prochain tresor est atteignable
