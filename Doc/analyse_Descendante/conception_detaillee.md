@@ -112,6 +112,10 @@
     * on retourne le tableau
 #
 
+* distribuer_tresors(tableau de joueurs, tableau de trésors)
+    * on distribue aléatoirement et équitablement les trésors entre les joueurs(paramètre tresors_restants)
+#
+
 * placer_tresors(plateau, le tableau de trésors)
     * creer un tableau de int de taille 34, le remplir avec 0,1,2,3,4...33
     * le trier aléatoirement
