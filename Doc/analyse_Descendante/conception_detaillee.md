@@ -159,168 +159,139 @@
 
 * void assigner_valeurs_orientations(p)
     * pour chaque case du plateau:
-        + si case an alors h=b=1 et g=d=0
-        + si case ae alors h=b=0 et d=g=1
-        + si case as alors h=b=1 et d=g=0
-        + si case ao alors h=b=0 et d=g=1
-        + si case bn alors h=d=1 et b=g=0
-        + si case be alors h=g=0 et b=d=1
-        + si case bs alors g=b=1 et h=d=0
-        + si case bo alors h=g=1 et d=b=0
-        + si case cn alors g=0 et h=d=b=1
-        + si case ce alors h=0 et d=g=b=1
-        + si case cs alors d=0 et h=g=b=1
-        + si case co alors b=0 et h=g=d=1
+        + on assigne la position des murs en fonction du type de case, pour chaque type de case possible(12 types)
 #
 
-* int tresor_atteignable(plateau p, joueur j)
-    * si peut_on_deplacer_ici(p, j.case, j.tresor[0].case)==1
+* entier tresor_atteignable(plateau, joueur)
+    * si peut_on_deplacer_ici(le plateau, la case sur laquelle est le joueur, la case sur laquelle est le trésor que doit atteindre le joueur) est égal à 1:
         + retourne 1
     * sinon
         + retourne 0
 #
 
-* int est_on_sur_tresor(joueur j)
-    * si j.case.tresor==j.tresorsrestants[0]
+* entier est_on_sur_tresor(joueur)
+    * si le joueur est sur le trésor qu'il doit atteindre
         + retourne 1
     * sinon
         + retourne 0
 #
 
-* void tresor_suivant(joueur j)
-    * pour tous les tresors restants -1(j.tresorsrestants)
-        + tresors[i]=tresors[i+1]
-    * dernier tresor(qui est ducoup en double)='\0'
+* tresor_suivant(joueur)
+    * on décale d'un cran vers la gauche le tableau de trésors, donc le trésor qu'on vient d'atteindre, qui était premier, disparaît, et le deuxième devient le premier, etc
+    * le dernier tresor qui est ducoup en double devient la fin du tableau
 #
 
-* void deplacer_pion(joueur j, plateau p, case c2)
-    * si pion_deplacable==1
-        + j.case=c2
+* deplacer_pion(joueur, plateau, case)
+    * si pion_deplacable(le plateau, la case sur laquelle est le joueur, la case passée en paramètre(qui est la case où l'on veut aller)) est égal à 1
+        + le paramètre case du joueur devient la case où il devait aller
     * sinon
         + afficher "Le pion ne peux pas être déplacé ici"
 #
 
-* int pion_deplacable(plateau p, case c1, case c2)
-    * si le pion n'est pas entre 4 murs(utiliser case_compatible) ET si peut_on_deplacer_ici(p, c1, c2)==1
+* entier pion_deplacable(plateau, case, case)
+    * si le pion n'est pas entre 4 murs(utiliser case_compatible) ET si peut_on_deplacer_ici(p, c1, c2) égal à 1
         + retourne 1
     * sinon
         + retourne 0
 #
 
-static int tabcaseint=0
-
-* int peut_on_deplacer_ici(plateau p, case c1, case c2, case* tabcase)
-    * tabcase[tabcaseint]=c1
-    * tabcaseint++
-    * (cette ligne est un for)si tabcaseint=0, pour les 4 orientation, sinon, pour seulement 3(pas celle d'ou l'on vient):
-        + si case_compatible(p, c1, (la case a coté de c1(suivant l'orientation)), tabcase)==1
-            * peut_on_deplacer_ici(p, la case a coté, c2, tabcase)
-    * si c2 présente dans tabcase
+* entier peut_on_deplacer_ici(plateau, la case où on est, la case où on veut aller, un tableau a taille variable de cases qui contient toutes les cases où il est possible d'aller a partir de la où on est)
+    * (cette ligne est une boucle)si on est à la première itération, pour les 4 orientation, sinon, pour seulement 3(pas celle d'ou l'on vient):
+        + si case_compatible(le plateau, la case ou on est, (la case a coté de c1(suivant l'orientation)), le tableau de cases) égal à 1:
+            * récursion: peut_on_deplacer_ici(le plateau, la case a coté, c2, tabcase)
+    * si c2 présente dans le tableau de cases
         + retourne 1
     * sinon
         + retourne 0
 #
 
-* int case_compatible(case c1, case c2, char orientation(où est la case 1 par rapport a la 2))
-    * si c1.orientation=1 et c2.orientation opposée=1
-        + retourne 1
+* entier case_compatible(première case, deuxième case, l'orientation(où est la case 1 par rapport a la 2))
+    * si il y a un chemin sur la première case sur l'orientation demandée ET pareil pour la deuxième:
+        + retourne 1(ça veut dire qu'on peut passer entre les 2 cases)
     * sinon
         + retourne 0
 #
 
-* void afficher_plateau(plateau p)
-    * pour i de 0 a 7
-        + afficher_fleche(s1)
-    * pour i de 0 a 7
-        + afficher_fleche(s2)
-    * afficher_lignes(p)
-    * pour i de 0 a 7
-        + afficher_fleche(n1)
-    * pour i de 0 a 7
-        + afficher_fleche(n2)
+* afficher_plateau(plateau)
+    * on affiche le plateau dans son état actuel: la case temporaire(afficher_case_tmp), les flèches pour les lignes(afficher_fleche), les 49 cases et ce qu'il y a dessus(murs, pions, trésors)
 #
 
-* void afficher_fleche(char c)
-    * si c='s1', afficher "|"
-    * si c='s2', afficher "v"
-    * si c='e', afficher "->"
-    * si c='o', afficher "<-"
-    * si c='n1', afficher "^"
-    * si c='n2', afficher "|"
+* afficher_fleche(emplacement de la flèche(par où elle pointe))
+    * on affiche une flèche en fonction de l'emplacement
 #
 
-* void afficher_case_tmp(case c)
+* afficher_case_tmp(case)
     * afficher "Case pour pousser:"
-    * afficher_case(c)
+    * afficher_case(la case)
 #
 
-* void afficher_lignes(plateau p)
-    * pour i de 1 a 7
-            * afficher_ligne(p.l[i])
+* afficher_lignes(plateau)
+    * pour les 7 premières lignes
+            * afficher_ligne(la ligne)
 #
 
-* void afficher_ligne(ligne l)
-    * afficher_fleche(e)
-    * pour i de 1 a 7
-        + afficher_case(l.c[i])
-    * afficher_fleche(o\n)
+* void afficher_ligne(ligne)
+    * afficher_fleche(l'orientation selon le numéro de la ligne)
+    * pour chaque case visible de la ligne
+        + afficher_case(la case])
+    * afficher_fleche(l'orientation inverse)
 #
 
-* void afficher_case(case c)
-    * afficher_murs(c)
-    * afficher_pion(c)
-    * afficher_tresor_sur_case(c)
+* afficher_case(case)
+    * afficher_murs(la case)
+    * afficher_pion(la case)
+    * afficher_tresor_sur_case(la case)
 #
 
-* void afficher_liste_tresors(joueur j)
+* afficher_liste_tresors(joueur)
     * pour tous les trésors restants
-        + afficher ""numéro du trésor". "nom du trésor"\n"
+        + afficher "numéro du trésor" et "nom du trésor"
 #
 
-* void afficher_tresor_sur_case(case c)
-    * afficher "c.tresor" 
+* afficher_tresor_sur_case(case)
+    * afficher le numéro du trésor qu'il y a sur la case si il y en a un
 #
 
-* void afficher_murs(case c)
+* afficher_murs(case)
     * afficher les murs en fonction du type de c avec des "|" et "-"
 #
 
-* void afficher_pion(case c)
-    * changer la couleur du pion en fonction de c.joueur
+* afficher_pion(case)
+    * changer la couleur du pion en fonction du joueur
     * afficher "I" de la bonne couleur
 #
 
-* void afficher_coup(case c1, case c2, ligne l, joueur j)
-    * afficher "Le joueur j.nom a poussé la ligne l et a déplacé son pion de la case c1 a la case c2"
+* afficher_coup(case où on était, case où on est allé, ligne qu'on a poussé, joueur)
+    * afficher "Le joueur x a poussé la ligne y et a déplacé son pion de la case c1 a la case c2"
 #
 
-* int est_elle_decalable(ligne l)
-    * Si l=ligne_tmp
+* entier est_elle_decalable(ligne)
+    * Si la ligne n'est pas l'inverse de celle d'on vient de décaler au tour d'avant(ligne_tmp)
        + on retourne 1
     * Sinon on retourne 0
 #
 
 * void pousser_rangee(ligne l)
     * Si est_elle_decalable(l)==1
-        + Pour i de 0 a 7
-            * l.case[i+1]=l.case[i]
-        + l.case[0]=case_tmp
-        + case_tmp=case[8]
+        + Pour chaque case
+            * on décale(il y a 8 cases sur une ligne mais la dernière le fait pas partie du plateau) de la même manière que les trésors
+        + la première case(qui est égale a la seconde) prends la valeur de la case tmp
+        + la 8eme case devient la case tmp
 #
 
-* ligne derniere_ligne(ligne l)
-    * ligne_tmp=l
+* ligne derniere_ligne(ligne)
+    * la ligne_tmp prends la valeur de la ligne en paramètre(paramètre numéro)
 #
 
-* void inserer_case(case c)
-    * c prend la valeur de case_tmp
+* inserer_case(case)
+    * la case prend la valeur de case_tmp
 #
 
-* void remplacer_case(case c)
-    * case_tmp prend la valeur de c
+* remplacer_case(case)
+    * case_tmp prend la valeur de la case
 #
 
-* int yatil_des_pions(case c)
+* entier yatil_des_pions(case)
     * Si il y a 0 joueurs sur la case:
         + on renvoit 0
     * Sinon:
