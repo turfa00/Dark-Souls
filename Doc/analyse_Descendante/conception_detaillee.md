@@ -1,194 +1,159 @@
 # Fonctions:
 
-* joueur* entrer_joueurs()
-    * joueur *j= demander_nombre_joueurs()
-    * demander_joueurs_humains(j)
-    * demander_couleur_joueurs(j)
-    * demander_pseudo_joueur(j)
+* tableau de joueurs entrer_joueurs()
+    * on crée un tableau de joueur et on l'initialise avec demander_nombre_joueurs()
+    * demander_joueurs_humains(le tableau)
+    * demander_couleur_joueurs(le tableau)
+    * demander_pseudo_joueur(le tableau)
 #
 
-* void demander_joueurs_humains(joueur *j)
+* demander_joueurs_humains(tableau de joueurs)
     * afficher "Combien d'IA?"
-    * si nombre d'IA  supérieur a nbrdejoueur-1
+    * si le nombre d'IA est supérieur a demander_nombre_joueurs()-1
         + afficher "Nombre d'IA pas cohérent avec le nombre de joueurs"
     * sinon 
-        + pour i de 1 a nombre d'IA
-            * creer_ia(j[i])
+        + pour chaque ia
+            * creer_ia(le joueur qui va devenir une ia)
 #
 
-* joueur* demander_nombre_joueurs()
+* tableau de joueurs demander_nombre_joueurs()
     * afficher "Combien de joueurs sur cette partie?"(nbr)
-    * si nbr égal à 2, 3 ou 4
+    * si demander_nombre_joueurs() égal à 2, 3 ou 4
         + créer des struct joueurs en conséquence
     * sinon
         + afficher "Il n'y a pas un nombre adéquat de joueur"
 #
 
-* void demander_couleur_joueurs(joueurs *j)
+* demander_couleur_joueurs(tableau de joueurs)
     * pour chaque joueur
         + afficher "Quelle est la couleur du joueur j.i?"(afficher les couleurs 1:Rouge, 2:Jaune...)
-        + j.couleur= le scanf (un int)
+        + le paramètre couleur du joueur prends l'entrée clavier
 #
 
-* void demander_pseudo_joueur(joueur *j)
+* demander_pseudo_joueur(tableau de joueurs)
     * pour chaque joueur
         + afficher "Quel est le pseudo du joueur j.i?"
-        + j.nom= le scanf(%s)
+        + le paramètre nom du joueur prends l'entrée clavier
 #
 
-* void changer_couleur(joueur j)
+* changer_couleur(joueur)
     * voir https://stackoverflow.com/questions/3219393/stdlib-and-colored-output-in-c
 #
 
-* joueur creer_ia(joueur j)
-    * j.ia=1(fonction courte mais plus parlante ds le code que juste "j.ia=1")
+* joueur creer_ia(joueur)
+    * le paramètre ia du joueur passe a 1(fonction courte mais plus lisible dans le code que juste "j.ia=1")
 #
 
-* void victoire_dun_joueur(joueur j)
-    * si case_depart(j)==1
-        + afficher_message_victoire(j)
+* victoire_dun_joueur(joueur)
+    * si case_depart(j) égal à 1(si le joueur a trouvé tous ses trésors et qu'il est retourné à son point de départ)
+        + afficher_message_victoire(le joueur)
         + on sort de la boucle du main avec les jouer_tour
 #
 
-* void afficher_message_victoire(joueur j)
+* afficher_message_victoire(joueur)
     * afficher "Le joueur j.nom a remporté la partie!"
 #
 
-* int case_depart(joueur j)
-    * si j.tresors[0]='\0'
+* entier case_depart(joueur)
+    * si le joueur a trouvé tous ses trésors et qu'il est retourné à son point de départ
         + retourne 1
     * sinon
         + retourne 0
 #
 
-* void jouer_tour_ia(joueur j, plateau p)
-    * analyse_coups_possibles_IA()
-    * pousser_rangee(choisir_ligne_ia(p, j))
-    * deplacer_pion_ia()
-    * afficher_coup()
+* jouer_tour_ia(joueur, plateau)
+    * on retourne les coups possibles avec analyse_coups_possibles_IA()
+    * pour pousse la rangée choisie par l'ia avec les 2 fonctions pousser_rangee(choisir_ligne_ia(le plateau, le joueur))
+    * l'ia deplace le pion avec deplacer_pion_ia()
+    * on afficher un bilan de ce que l'ia viens de faire avec afficher_coup()
 #
 
-* analyse_coups_possibles_IA(plateau p, joueur j) (En cours de conception)
-    * On fait un tab[48][48] d'entiers en considérant qu'on place le pion automatiquement à une case précise après le premier coup, genre la plus proche du trésor
+* tableau de lignes analyse_coups_possibles_IA(plateau, joueur)
+    * On fait un tableau regroupant tous les coups possibles
     * (Faut trouver un moyen d'associer chaque indice du tableau à un coup, nouvelle struct?)
-    * Tout est à 0 au début:
-        * si le trésor est atteint dans une des 48 premières possibilités (tab[0][0] jusqu'à tab[0][47]) on fait +1 dans ces cases et on s'arrête à la 48e 
-        * sinon on remplit le tableau 48*48 et on fait +1 dans les cases où le trésor est atteint au deuxième coup.
-        * sinon on incrémente pas.
-    * Donc:
-    * Dans le deuxième cas on lui fait prendre le chemin qui correspond à la première occurence de 1 du tableau pour que ce soit plus simple .
-    * Dans le premier cas vu qu'on aura que 48 possibilités on peut sûrement complexifier un peu en analysant les 48 possibilités de chaque autre joueurs pour voir quel coup gênerait le plus. (Nouvelle fonction analyse_bloquage_possible_IA()) Du coup ça nous fait une IA qui devient menaçante dès qu'elle s'approche de son trésor et ça donne un intérêt pour vouloir la bloquer.
+    * si le trésor est atteint dans une des 48 premières possibilités alors on joue ce coup
+    * sinon on cherche les combinaisons de 2 coups qui permettraint d'atteindre le tresor
+    * sinon on pousse une rangée au hasard qui libère un chemin et on déplace le pion sur ce chemin
 #
 
-* analyse_bloquage_possible_IA(plateau p, joueur j, autres joueurs, analyse_coups_possibles_IA)
-    * Même principe que analyse_coups_possibles_IA pour les 48 prochains coups possibles des autres joueurs, afin de savoir s'ils pourront accéder à leur trésor au prochain coup. (tab[48], et +1 s'ils peuvent y accéder)
+* analyse_bloquage_possible_IA(plateau, joueur, autres joueurs(tableau de joueurs), analyse_coups_possibles_IA(le plateau, le joueur))
+    * Même principe que analyse_coups_possibles_IA pour les 48 prochains coups possibles des autres joueurs, afin de savoir s'ils pourront accéder à leur trésor au prochain coup.
     * On va ensuite analyser chaque coup retenu par analyse_coups_possibles_IA et incrémenter chaque case dans le cas où le coup d'un joueur passe de 1 à 0. Le coup ayant été le plus de fois incrémentée est celle qui bloquera le plus de coups possibles chez les autres joueurs tout en permettant à l'IA d'atteindre son trésor
 #
 
-* ligne choisir_ligne_ia(plateau p, joueur j)
+* ligne choisir_ligne_ia(plateau, joueur)
     * pour les 12 lignes:
         + si, quand on bouge la ligne, le prochain tresor est accessible
             * on retourne cette ligne
 #
 
-* void deplacer_pion_ia()
+* deplacer_pion_ia()
     * si le prochain tresor est atteignable
         + deplacer_pion() sur le tresor
-        + tresor_suivant()
+        + on passe au trésor suivant avec tresor_suivant()
     * sinon
         on reste ou on est
 #
 
 * plateau creer_plateau()
-    * plateau p=creer_cases_fixes()
-    * on cree un tableau de 12 lignes=creer_lignes_mouvantes()
-    * assignation_indices_cases(le tableau)
-    * tri_aleatoire_cases_mouvantes(p)
-    * tresor* liste_tresors=creer_tresors()
-    * placer_tresors(p, liste_tresors)
+    * on crée un plateau égal à creer_cases_fixes()
+    * on cree un tableau de 12 lignes égal à creer_lignes_mouvantes()
+    * on assigne des indice hauteur et largeur à chaque cases pour les situer dans le plateau et on leur donne un numéro unique avec assignation_indices_cases(le tableau)
+    * on place aléatoirement les cases mouvantes sur le plateau tri_aleatoire_cases_mouvantes(p)
+    * on crée un tableau de trésors égal à creer_tresors()
+    * on disperse aléatoirement les trésors sur le plateu avec placer_tresors(p, liste_tresors)
 #
 
-* tresor* creer_tresors()
+* tableau de trésors creer_tresors()
     * on crée un tableau de 24 trésors
-    * pour i de 0 a 23:
-        + tresor[i].numero=i+1
-        + tresor[i].nom="le nom"(peut etre dans un fichier)
-    * retourne le tableau
+    * pour chaque trésor:
+        + on lui assigne son numéro
+        + on lui assigne son nom (on prendra les noms dans un fichier)
+    * on retourne le tableau
 #
 
-* void placer_tresors(plateau p, tresor* liste_tresors)
+* placer_tresors(plateau, le tableau de trésors)
     * creer un tableau de int de taille 34, le remplir avec 0,1,2,3,4...33
     * le trier aléatoirement
-    * int j=0
-    * pour i de 0 a 24
-        + si la case n'est pas un coin
-            * on associe a la case qui a le numéro tab[i] le tresor numero i de la liste
+    * pour les 24 tresors:
+        + si la case dont le numéro correspond à l'indice n'est pas un coin
+            * on associe a la case qui a le numéro correspondant le tresor de la liste
         + sinon
-            * j++ et on associe le tresor numero i a la case[24+j]
+            * on associe le tresor a une case dont le numéro est supérieur a 24(qui n'est pas un coin)
 #
 
-* void tri_aleatoire_cases_mouvantes(plateau p)
+* tri_aleatoire_cases_mouvantes(plateau)
     * creer un tableau de int de taille 34, le remplir avec 0,1,2,3,4...33
     * trier aléatoirement ce tableau
-    * pour i de 0 a 11
-        + si le num de la case est 0(la case tmp), case_tmp.type='a', sinon:
-            * pour la case dont le case.numero est = a tab[i]: case.type[0]='a'
-            * pour la case dont le case.numero est = a tab[i]: case.type[1]= une orientation aléatoire entre les 4(h,b,d ou g)
-    * pour i de 12 a 17
-        + si le num de la case est 0(la case tmp), case_tmp.type='c', sinon:
-            * pour la case dont le case.numero est = a tab[i]: case.type[0]='c'
-            * pour la case dont le case.numero est = a tab[i]: case.type[1]= une orientation aléatoire entre les 4(h,b,d ou g)
-    * pour i de 18 a 33
-        + si le num de la case est 0(la case tmp), case_tmp.type='b', sinon:
-            * pour la case dont le case.numero est = a tab[i]: case.type[0]='b'
-            * pour la case dont le case.numero est = a tab[i]: case.type[1]= une orientation aléatoire entre les 4(h,b,d ou g)
+    * pour les 12 cases de types a:
+        + si le num de la case est 0(la case tmp), le paramètre type de la case_tmp est ax,x étant une orientation aléatoirement choisie entre les 4, sinon:
+            * pour la case dont le numéro correspond a l'indice dans le tableau d'entier: son type devient ax, x étant une orientation aléatoirement choisie entre les 4
+    * pour les 6 cases de type c:
+        + si le num de la case est 0(la case tmp), le paramètre type de la case_tmp est cx,x étant une orientation aléatoirement choisie entre les 4, sinon:
+            * pour la case dont le numéro correspond a l'indice dans le tableau d'entier: son type devient cx, x étant une orientation aléatoirement choisie entre les 4
+    * pour les case de type b:
+        + si le num de la case est 0(la case tmp), le paramètre type de la case_tmp est bx,x étant une orientation aléatoirement choisie entre les 4, sinon:
+            * pour la case dont le numéro correspond a l'indice dans le tableau d'entier: son type devient bx, x étant une orientation aléatoirement choisie entre les 4
 #
 
-* void assignation_indices_cases(ligne*)
-    * pour i de 2 a 6 (de 2 en 2)
-        + pour toutes les 8 cases de la ligne[i/2] (j de 1 a 8):
-            * case.numero_ligne[0]=i/2 et case.numero_ligne[1]=(i/2)+6 et quand j=i: case.numero_ligne[2]=i
-            * indice i de la case =i
-            * indice j de la case=j
-            * case.numero=(i/2)*3+((i/2)-1)*7+j
-    * pour i de 8 a 12 (de 2 en 2)
-        + pour toutes les 8 cases de la ligne[i/2] (j de 1 a 8):
-            * case.numero_ligne[0]=i/2 et case.numero_ligne[1]=(i/2)+6 et quand j=i: case.numero_ligne[2]=i
-            * indice j de la case=i
-            * indice i de la case=j
-    * pour i de 1 a 7 (par 2)
-        + pour j de 2 a 6 (par 2)
-            * case[i][j].numero=((i-i%2)*5+j
+* assignation_indices_cases(tableau de lignes)
+    * en s'aidant de la position des lignes par rapport au plateau on et de maths, on parvient à assigner des indices hauteur et largeur a chaque case de telle sorte que la première case aie comme indices 0,0 et la dernière(en bas a droite) 7,7.
+    * calculs non détaillés ici car conception détaillée
 #
 
-* ligne* creer_lignes_mouvantes()
+* tableau de lignes creer_lignes_mouvantes()
     * on crée un tableau de 12 lignes
-    * pour i de 1 a 12
-        + tab[i].numéro=i
+    * pour chaque ligne
+        + on lui assigne son numéro(de 1 a 12)(paramètre numero)
         + on créé un tableau de 8 cases et on l'assigne a la ligne
         + pour chaque case de la ligne
-            * case.numligne=i
+            * on assigne au paramètre numligne de la case le numéro de la ligne
     * on renvoie le tableau
 #
 
 * plateau creer_casesfixes()
     * on crée un plateau
-    * case1,1.type=be
-    * case1,3.type=ce
-    * case1,5.type=ce
-    * case1,7.type=bs
-    * case3,1.type=cn
-    * case3,3.type=cn
-    * case3,5.type=ce
-    * case3,7.type=cs
-    * case5,1.type=cn
-    * case5,3.type=co
-    * case5,5.type=cs
-    * case5,7.type=cs
-    * case7,1.type=bn
-    * case7,3.type=co
-    * case7,5.type=co
-    * case7,7.type=bo
+    * on s'aide des indices pour creer les cases fixes du plateau en suivant le modèle(on leur assigne le bon type et la bonne place)
     * retourne le plateau
 #
 
