@@ -62,7 +62,8 @@
 #
 
 * jouer_tour_ia(joueur, plateau)
-    * on retourne les coups possibles avec analyse_coups_possibles_IA()
+    * Si état = 1 on retourne les coups possibles avec analyse_bloquage_possible_IA()
+    * Sinon si état = 2 on retourne les coups possibles avec analyse_coups_possibles_IA()
     * pour pousse la rangée choisie par l'ia avec les 2 fonctions pousser_rangee(choisir_ligne_ia(le plateau, le joueur))
     * l'ia deplace le pion avec deplacer_pion_ia()
     * on afficher un bilan de ce que l'ia viens de faire avec afficher_coup()
@@ -71,8 +72,8 @@
 * tableau de lignes analyse_coups_possibles_IA(plateau, joueur)
     * On fait un tableau regroupant tous les coups possibles
     * (Faut trouver un moyen d'associer chaque indice du tableau à un coup, nouvelle struct?)
-    * si le trésor est atteint dans une des 48 premières possibilités alors on joue ce coup
-    * sinon on cherche les combinaisons de 2 coups qui permettraint d'atteindre le tresor
+    * si le trésor est atteint dans une des 48 premières possibilités alors on joue ce coup et etat = 1
+    * sinon on cherche les combinaisons de 2 coups qui permettraint d'atteindre le tresor et etat = 2
     * sinon on pousse une rangée au hasard qui libère un chemin et on déplace le pion sur ce chemin
 #
 
